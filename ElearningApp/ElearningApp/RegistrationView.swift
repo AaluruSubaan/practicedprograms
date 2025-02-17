@@ -32,6 +32,10 @@ struct RegistrationView: View {
                 Button("Register"){
                     register()
                 }
+                Button("Already have an account? Please Login"){
+                    dismiss()
+                }
+                
             }.navigationTitle("Register")
         }
     }

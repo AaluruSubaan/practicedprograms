@@ -19,34 +19,36 @@ struct LoginView: View {
     
     var body: some View {
         NavigationView{
-            Form{
-                Section(header: Text("Login")){
-                    TextField("Email",text: $email).keyboardType(.emailAddress)
-                        .autocapitalization(.none)
-                    SecureField("Password", text:$password)
+            
+                Form{
+                    Section(header: Text("Login")){
+                        TextField("Email",text: $email).keyboardType(.emailAddress)
+                            .autocapitalization(.none)
+                        SecureField("Password", text:$password)
+                    }
+                    if !loginError.isEmpty{
+                        Text(loginError)
+                            .foregroundColor(.red)
+                    }
+                    Button("Login"){
+                        login()
+                    }
+                    Button("Register"){
+                        showRegistration = true
+                    }
                 }
-                if !loginError.isEmpty{
-                    Text(loginError)
-                        .foregroundColor(.red)
-                }
-                Button("Login"){
-                    login()
-                }
-                Button("Register"){
-                    showRegistration = true
-                }
-            }
-            .navigationTitle("Login")
+                .navigationTitle("Login")
                 .sheet(isPresented: $showRegistration){
                     RegistrationView()
                 }
                 .background(NavigationLink(destination:MainView(), isActive: $isLoggedIn){
                     EmptyView()
                 }
-                            )
+                )
             }
+            
         
-        }
+    }
         private func login(){
             let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
             fetchRequest.predicate =  NSPredicate(format: "email == %@ AND password == %@", email,password)
@@ -62,6 +64,7 @@ struct LoginView: View {
                 loginError = "Error logging in: \(error.localizedDescription)"
             }
     }
+    
 }
 
 struct LoginView_Previews: PreviewProvider {

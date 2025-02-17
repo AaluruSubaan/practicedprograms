@@ -14,6 +14,8 @@ struct ExamView: View {
     @State private var selectedAnswer: String?
     @State private var score = 0
     @State private var showResults = false
+   
+   
     var body: some View {
         NavigationView{
             VStack{

@@ -38,7 +38,7 @@ struct SubjectView: View {
         question.options = ["3", "20", "4", "6"] as NSObject
         question.correctanswer = "20"
         question.subject = subjects
-        
+       
         do{
             try viewContext.save()
         } catch {
